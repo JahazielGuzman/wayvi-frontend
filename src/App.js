@@ -3,8 +3,7 @@ import './App.css';
 import Musicplayer from './components/Musicplayer'
 import SongCollection from './components/SongCollection'
 import Sidebar from './components/Sidebar';
-const URL = 'http://localhost:3000/songs';
-
+const URL = 'http://localhost:3000';
 class App extends Component {
 
   state = {
@@ -20,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(URL)
+    fetch(`${URL}/songs`)
     .then(res => res.json())
     .then(songData => {
       this.setState({ allSongs: songData, recommendedSongs: songData , songList: songData})
@@ -44,10 +43,23 @@ class App extends Component {
   }
 
   login = (username, password) => {
-    const foundUser = this.state.allUsers.find(user => {
-      return (user.username === username && user.password_digest === password)
+    fetch(`${URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({username: username, password: password})
     })
-    this.setState({ user: foundUser })
+    .then(res => res.json())
+    .then(toke => {
+      if (toke.token == "")
+        alert("you're username or password are incorrect");
+      else {
+        const token = toke.token.split(' ')[1];
+        localStorage.setItem('auth_token', token);
+      }
+    })
   }
 
   playPrev = () => {

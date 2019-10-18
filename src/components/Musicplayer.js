@@ -4,6 +4,7 @@ class Musicplayer extends React.Component {
 
   componentDidUpdate() {
     this.refs.player.load();
+    this.refs.player.play();
   }
 
   render() {
