@@ -2,15 +2,23 @@ import React from 'react'
 
 class Song extends React.Component {
 
+  state = {
+
+  }
+
   render() {
 
     return (
       <div className="song-container">
         <div className="song" style={{background: `url(${this.props.songInfo.image})`}}>
-          <button className="play" onClick={
+          <button className={this.props.isCurrent ? "paused" : "play"} onClick={
               (e) => {
-                this.props.playSong(this.props.songInfo, this.props.songIndex);
-                e.target.className = e.target.className == "paused" ? "play" : "paused";
+                if (this.props.isCurrent) {
+                  this.props.pauseSong();
+                }
+                else
+                  this.props.playSong(this.props.songInfo, this.props.songIndex);
+
               }
             }></button>
             { this.props.showPlaylist ? <button onClick={() => this.props.addSongToPlaylist(this.props.songInfo)}>Add</button> : null }

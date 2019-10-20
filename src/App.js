@@ -12,6 +12,7 @@ class App extends Component {
     currentSong: {},
     currentSongIndex: -1,
     playlists: [],
+    playOrPause: 0,
     songList: [],
     currentPlaylist: 0,
     showPlaylist: false,
@@ -39,7 +40,12 @@ class App extends Component {
   }
 
   playSong = (song, songIndex) => {
-    this.setState({ currentSong: song , currentSongIndex: songIndex})
+    this.setState({ currentSong: song , currentSongIndex: songIndex, playOrPause: 1 })
+  }
+
+  pauseSong = () => {
+
+    this.setState({ playOrPause: 0 })
   }
 
   login = (username, password) => {
@@ -155,13 +161,22 @@ class App extends Component {
             <SongCollection
               allSongs={this.state.allSongs}
               recommendedSongs={this.state.recommendedSongs}
+              currentSong={this.state.currentSong}
+              currentSongIndex={this.state.currentSongIndex}
+              currentPlaylist={this.state.currentPlaylist}
               playSong={this.playSong}
               songList={this.state.songList}
               showPlaylist={this.state.showPlaylist}
               addSongToPlaylist={this.addSongToPlaylist}
               removeSongFromPlaylist={this.removeSongFromPlaylist}
+              pauseSong={this.pauseSong}
             />
-            <Musicplayer playPrev={this.playPrev} playNext={this.playNext} currentSong={this.state.currentSong} />
+            <Musicplayer 
+              playPrev={this.playPrev} 
+              playNext={this.playNext} 
+              currentSong={this.state.currentSong} 
+              playOrPause={this.state.playOrPause}
+            />
           </div>
         </div>
       </React.Fragment>

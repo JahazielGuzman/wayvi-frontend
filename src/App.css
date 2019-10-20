@@ -51,6 +51,7 @@ button:hover {
 }
 
 .paused {
+  position: relative;
     border: 0;
   background: transparent;
   box-sizing: border-box;
@@ -60,6 +61,8 @@ button:hover {
   border-color: transparent transparent transparent #202020;
     border-style: double;
     border-width: 0px 0 0px 60px;
+    top: 4em;
+  left: 2em;
 }
 
 .play:hover {

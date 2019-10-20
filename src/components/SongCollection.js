@@ -3,10 +3,25 @@ import Song from './Song'
 
 class SongCollection extends React.Component {
 
+  setToPlay(song, playlist) {
+    let isCurrentSong = (this.props.currentSong == song);
+    // let isCurrentPlaylist = (this.props.currentPlaylist == playlist);
+    return isCurrentSong;
+  }
+
   render() {
 
     const allSongs = this.props.allSongs.map((song, index) => {
-      return <Song key={song.id} songIndex={index} songInfo={song} playSong={this.props.playSong} />
+      return (
+        <Song 
+          key={song.id} 
+          songIndex={index} 
+          songInfo={song} 
+          playSong={this.props.playSong}
+          pauseSong={this.props.pauseSong}
+          isCurrent={this.setToPlay(song, this.props.allSongs)}
+        />
+      )
     })
 
     const playlistSongs = this.props.songList.map((song, index) => {
@@ -16,7 +31,9 @@ class SongCollection extends React.Component {
           songIndex={index}
           songInfo={song}
           playSong={this.props.playSong}
+          pauseSong={this.props.pauseSong}
           removeSongFromPlaylist={this.props.removeSongFromPlaylist}
+          isCurrent={this.setToPlay(song, this.props.playlistSongs)}
         />
       )
     })
@@ -28,8 +45,10 @@ class SongCollection extends React.Component {
           songIndex={index}
           songInfo={song}
           playSong={this.props.playSong}
+          pauseSong={this.props.pauseSong}
           showPlaylist={this.props.showPlaylist}
           addSongToPlaylist={this.props.addSongToPlaylist}
+          isCurrent={this.setToPlay(song, this.props.recommendedSongs)}
         />
       )
     })
