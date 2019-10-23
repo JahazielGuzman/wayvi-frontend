@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     allSongs: [],
     user: null,
+    pausedSong: {},
     currentSong: {},
     currentSongIndex: -1,
     playlists: [],
@@ -45,7 +46,7 @@ class App extends Component {
 
   playOrPauseCurrentSong = () => {
 
-      this.setState({ isPlaying: !this.state.isPlaying })
+      this.setState({ pausedSong: this.state.currentSong, isPlaying: !this.state.isPlaying })
   }
 
   login = (username, password) => {
@@ -58,12 +59,14 @@ class App extends Component {
       body: JSON.stringify({username: username, password: password})
     })
     .then(res => res.json())
-    .then(toke => {
-      if (toke.token == "")
+    .then(result => {
+      if (result.token == "")
         alert("you're username or password are incorrect");
       else {
-        const token = toke.token.split(' ')[1];
+        alert("ayo waddup")
+        const token = result.token.split(' ')[1];
         localStorage.setItem('auth_token', token);
+        this.setState({user: result.user})
       }
     })
   }
@@ -173,9 +176,10 @@ class App extends Component {
               isPlaying={this.state.isPlaying}
             />
             <Musicplayer 
-              playPrev={this.playPrev} 
-              playNext={this.playNext} 
-              currentSong={this.state.currentSong} 
+              playPrev={this.playPrev}
+              playNext={this.playNext}
+              currentSong={this.state.currentSong}
+              pausedSong={this.state.pausedSong}
               isPlaying={this.state.isPlaying}
             />
           </div>
