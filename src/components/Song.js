@@ -24,9 +24,13 @@ class Song extends React.Component {
 
               }
             }></button>
-            { this.props.showPlaylist ? <button onClick={() => this.props.addSongToPlaylist(this.props.songInfo)}>Add</button> : null }
+            { this.props.showPlaylist ? 
+              <span 
+                className="add-to-playlist"
+                onClick={() => this.props.addSongToPlaylist(this.props.songInfo)}
+              >&#43;</span> : null }
         </div>
-          <div className="songDetail">
+          <div className={this.props.isCurrent ? "song-detail-green" : "song-detail-white"}>
             <p className="songTitle">{this.props.songInfo.name}</p>
             <p className="songArtist">{this.props.songInfo.artist_name}</p>
           </div>

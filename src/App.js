@@ -63,7 +63,6 @@ class App extends Component {
       if (result.token == "")
         alert("you're username or password are incorrect");
       else {
-        alert("ayo waddup")
         const token = result.token.split(' ')[1];
         localStorage.setItem('auth_token', token);
         this.setState({user: result.user})
