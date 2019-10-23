@@ -9,12 +9,22 @@ class Musicplayer extends React.Component {
       if (this.props.pausedSong != this.props.currentSong) {
         this.refs.player.load();
       }
-      
+
       this.refs.player.play();
     }
     else {
       this.refs.player.pause();
     }
+  }
+
+  onClickPlay() {
+    if (!this.props.isPlaying)
+      this.props.playOrPauseCurrentSong();
+  }
+
+  onClickPause() {
+    if (this.props.isPlaying)
+      this.props.playOrPauseCurrentSong();
   }
 
   render() {
@@ -26,7 +36,13 @@ class Musicplayer extends React.Component {
         </div>
         <button id="previous" className="player-btn" onClick={this.props.playPrev}>&larr;</button>
         <button id="next" className="player-btn" onClick={this.props.playNext}>&rarr;</button>
-        <audio controls ref="player">
+        <audio 
+          controls 
+          ref="player"
+          onEnded={() => this.onClickPause()}
+          onPlay={() => this.onClickPlay()}
+          onPause={() => this.onClickPause()}
+        >
           <source src={this.props.currentSong.path} type="audio/mp3"/>
         </audio>
       </div>

@@ -180,6 +180,7 @@ class App extends Component {
               currentSong={this.state.currentSong}
               pausedSong={this.state.pausedSong}
               isPlaying={this.state.isPlaying}
+              playOrPauseCurrentSong={this.playOrPauseCurrentSong}
             />
           </div>
         </div>
