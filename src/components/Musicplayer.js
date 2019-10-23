@@ -3,7 +3,7 @@ import React from 'react'
 class Musicplayer extends React.Component {
 
   componentDidUpdate() {
-    if (this.props.playOrPause) {
+    if (this.props.isPlaying) {
       
       this.refs.player.load();
       this.refs.player.play();

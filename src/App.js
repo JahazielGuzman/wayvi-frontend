@@ -12,7 +12,7 @@ class App extends Component {
     currentSong: {},
     currentSongIndex: -1,
     playlists: [],
-    playOrPause: 0,
+    isPlaying: 0,
     songList: [],
     currentPlaylist: 0,
     showPlaylist: false,
@@ -39,13 +39,15 @@ class App extends Component {
       })
   }
 
-  playSong = (song, songIndex) => {
-    this.setState({ currentSong: song , currentSongIndex: songIndex, playOrPause: 1 })
+  playNewSong = (song, songIndex) => {
+    this.setState({ currentSong: song , currentSongIndex: songIndex, isPlaying: 1 })
   }
 
-  pauseSong = () => {
+  playOrPauseCurrentSong = () => {
 
-    this.setState({ playOrPause: 0 })
+    if (this.currentSong) {
+      this.setState({ isPlaying: !this.state.isPlaying })
+    }
   }
 
   login = (username, password) => {
@@ -164,18 +166,19 @@ class App extends Component {
               currentSong={this.state.currentSong}
               currentSongIndex={this.state.currentSongIndex}
               currentPlaylist={this.state.currentPlaylist}
-              playSong={this.playSong}
+              playNewSong={this.playNewSong}
               songList={this.state.songList}
               showPlaylist={this.state.showPlaylist}
               addSongToPlaylist={this.addSongToPlaylist}
               removeSongFromPlaylist={this.removeSongFromPlaylist}
-              pauseSong={this.pauseSong}
+              playOrPauseCurrentSong={this.playOrPauseCurrentSong}
+              isPlaying={this.state.isPlaying}
             />
             <Musicplayer 
               playPrev={this.playPrev} 
               playNext={this.playNext} 
               currentSong={this.state.currentSong} 
-              playOrPause={this.state.playOrPause}
+              isPlaying={this.state.isPlaying}
             />
           </div>
         </div>

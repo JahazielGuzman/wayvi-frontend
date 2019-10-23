@@ -11,13 +11,16 @@ class Song extends React.Component {
     return (
       <div className="song-container">
         <div className="song" style={{background: `url(${this.props.songInfo.image})`}}>
-          <button className={this.props.isCurrent ? "paused" : "play"} onClick={
+          <button className={(this.props.isCurrent && !this.props.isPlaying) ? "paused" : "play"} onClick={
               (e) => {
                 if (this.props.isCurrent) {
-                  this.props.pauseSong();
+                  // if the song is already set to play, then pause it
+                  this.props.playOrPauseCurrentSong();
                 }
-                else
-                  this.props.playSong(this.props.songInfo, this.props.songIndex);
+                else {
+                  // if the song has not been set to play, then start playing it.
+                  this.props.playNewSong(this.props.songInfo, this.props.songIndex);
+                }
 
               }
             }></button>

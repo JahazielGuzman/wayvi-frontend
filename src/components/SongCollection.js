@@ -17,9 +17,10 @@ class SongCollection extends React.Component {
           key={song.id} 
           songIndex={index} 
           songInfo={song} 
-          playSong={this.props.playSong}
-          pauseSong={this.props.pauseSong}
+          playNewSong={this.props.playNewSong}
+          playOrPauseCurrentSong={this.props.playOrPauseCurrentSong}
           isCurrent={this.setToPlay(song, this.props.allSongs)}
+          isPlaying={this.props.isPlaying}
         />
       )
     })
@@ -30,10 +31,11 @@ class SongCollection extends React.Component {
           key={song.song_id}
           songIndex={index}
           songInfo={song}
-          playSong={this.props.playSong}
-          pauseSong={this.props.pauseSong}
+          playNewSong={this.props.playNewSong}
+          playOrPauseCurrentSong={this.props.playOrPauseCurrentSong}
           removeSongFromPlaylist={this.props.removeSongFromPlaylist}
           isCurrent={this.setToPlay(song, this.props.playlistSongs)}
+          isPlaying={this.props.isPlaying}
         />
       )
     })
@@ -44,11 +46,12 @@ class SongCollection extends React.Component {
           key={song.id}
           songIndex={index}
           songInfo={song}
-          playSong={this.props.playSong}
-          pauseSong={this.props.pauseSong}
+          playNewSong={this.props.playNewSong}
+          playOrPauseCurrentSong={this.props.playOrPauseCurrentSong}
           showPlaylist={this.props.showPlaylist}
           addSongToPlaylist={this.props.addSongToPlaylist}
           isCurrent={this.setToPlay(song, this.props.recommendedSongs)}
+          isPlaying={this.props.isPlaying}
         />
       )
     })
