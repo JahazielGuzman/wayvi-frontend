@@ -45,9 +45,7 @@ class App extends Component {
 
   playOrPauseCurrentSong = () => {
 
-    if (this.currentSong) {
       this.setState({ isPlaying: !this.state.isPlaying })
-    }
   }
 
   login = (username, password) => {
