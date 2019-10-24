@@ -70,6 +70,23 @@ class App extends Component {
     })
   }
 
+  register = (username, name, password) => {
+    fetch(`${URL}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({username: username, name: name, password: password})
+    })
+    .then(res => res.json())
+    .then(result => {
+      const token = result.token.split(' ')[1];
+      localStorage.setItem('auth_token', token);
+      this.setState({user: result.user})
+    });
+  }
+
   playPrev = () => {
     const songIndex = this.state.currentSongIndex;
     if (songIndex > 0)
@@ -154,12 +171,12 @@ class App extends Component {
             <Sidebar
               user={this.state.user}
               login={this.login}
+              register={this.register}
               playlists={userPlaylists}
               showPlaylist={this.showPlaylist}
               addPlaylist={this.addPlaylist} />
           </div>
           <div>
-            <h1 id="title"> ~ ~ Wayvi ~ ~ </h1><br/>
             <SongCollection
               allSongs={this.state.allSongs}
               recommendedSongs={this.state.recommendedSongs}

@@ -3,6 +3,14 @@ html {
   margin-bottom: 5em;
 }
 
+.logo {
+  font-family: 'Knewave', cursive;
+  font-size: 4em;
+  color: #00abab;
+  text-align: center;
+  padding: 0.2em 0em;
+}
+
 audio {
   outline: none;
   width: 40%;
@@ -39,7 +47,7 @@ button:hover {
   background: transparent;
   box-sizing: border-box;
   width: 0;
-  height: 50px;
+  height: 6em;
   position: absolute;
   border-color: transparent transparent transparent #202020;
   transition: 100ms all ease;
@@ -56,7 +64,7 @@ button:hover {
   background: transparent;
   box-sizing: border-box;
   width: 0;
-  height: 50px;
+  height: 6em;
 
   border-color: transparent transparent transparent #202020;
   border-style: double;
@@ -66,6 +74,10 @@ button:hover {
 }
 
 .play:hover {
+    border-color: transparent transparent transparent #404040;
+}
+
+.paused:hover {
     border-color: transparent transparent transparent #404040;
 }
 
@@ -94,7 +106,6 @@ button:hover {
   position: relative;
   height: 14em;
   width: 14em;
-  border: solid 0.1em;
 }
 
 .song:hover {
@@ -146,13 +157,14 @@ button:hover {
 .submit {
   height: 2.5em;
   width: 100%;
-  border-radius: 2em;
+  border-radius: 0.2em;
   margin-top: 1em;
   background-color: black;
   color: teal;
   font-size: 1em;
   font-weight: bold;
   outline: none;
+  border-width: 0px;
 }
 
 .submit:hover {
@@ -163,13 +175,17 @@ button:hover {
 }
 
 .player-btn {
-  background-color: white;
+  cursor: pointer;
+  background-color: rgb(10,10,10);
+  float: left;
+  color: white;
   height: 2em;
-  width: 2em;
+  width: 3em;
+  border-radius: 1em;
+  border: 1px solid #484444;
   margin-top: 1em;
   margin-left: 1em;
   margin-right: 1em;
-  float: left;
 }
 
 #title {
@@ -211,7 +227,8 @@ button:hover {
 }
 
 #musicplayer {
-  background-color: rgb(245,245,245);
+  background-color: rgb(10,10,10);
+  color: white;
   position: fixed;
   bottom: 0;
   width: 100%;

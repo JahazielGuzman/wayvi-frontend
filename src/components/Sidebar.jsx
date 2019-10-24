@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from './Login';
+import Register from './Register'
 import UserInfo from './UserInfo';
 
 class Sidebar extends Component {
@@ -9,6 +10,7 @@ class Sidebar extends Component {
     return (
       <div className="tile is-2 is-parent">
         <article id="sidebar" className="tile is-child notification has-background-black">
+          <h1 class="logo">Waivi</h1>
           <div className="content has-text-grey-light">
           </div>
             {
@@ -18,7 +20,10 @@ class Sidebar extends Component {
                 playlists={this.props.playlists}
                 showPlaylist={this.props.showPlaylist}
                 addPlaylist={this.props.addPlaylist} /> :
-              <Login login={this.props.login} />
+                <React.Fragment>
+                  <Login login={this.props.login} />
+                  <Register register={this.props.register}/>
+                </React.Fragment>
             }
         </article>
       </div>
