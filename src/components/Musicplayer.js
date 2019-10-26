@@ -30,9 +30,10 @@ class Musicplayer extends React.Component {
   render() {
     return (
       <div id="musicplayer">
+        {this.props.currentSong ? <img className="song-art" src={this.props.currentSong.image} /> : ""}
         <div id="songInfo">
-          <span className="songTitle">{this.props.currentSong.name}</span> <br/>
-          <span className="songArtist">{this.props.currentSong.artist_name}</span>
+          <span className="songTitle">{this.props.currentSong ? this.props.currentSong.name : ""}</span> <br/>
+          <span className="songArtist">{this.props.currentSong ? this.props.currentSong.artist_name : ""}</span>
         </div>
         <button id="previous" className="player-btn" onClick={this.props.playPrev}>&larr;</button>
         <button id="next" className="player-btn" onClick={this.props.playNext}>&rarr;</button>
@@ -43,7 +44,7 @@ class Musicplayer extends React.Component {
           onPlay={() => this.onClickPlay()}
           onPause={() => this.onClickPause()}
         >
-          <source src={this.props.currentSong.path} type="audio/mp3"/>
+          <source src={this.props.currentSong ? this.props.currentSong.path : ""} type="audio/mp3"/>
         </audio>
       </div>
     )

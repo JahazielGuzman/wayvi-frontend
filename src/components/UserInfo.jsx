@@ -25,9 +25,17 @@ class UserInfo extends Component {
     return (
       <div className="content has-text-grey-light">
         <div className="columns is-gapless">
-          <div>
-            <img src="https://bulma.io/images/placeholders/32x32.png" alt="user" />
-            <span id="user">{this.props.user.name}</span>
+        <div class="user-panel">
+            <div class="user-name">
+              <img src="https://bulma.io/images/placeholders/32x32.png" alt="user" />
+              <span id="user">{this.props.user.name}</span>
+            </div>
+            {this.props.user ? 
+            <div>
+              <a className="log-out" onClick={this.props.logout}>log out</a>
+            </div>:
+            ""
+            }
           </div>
         </div>
         <div id="playlist">

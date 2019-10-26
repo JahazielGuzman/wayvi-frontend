@@ -21,25 +21,9 @@ input {
   width: 100%;
 }
 
-/* button {
-  height: 3em;
-  width: 5em;
-  border-radius: 2em;
-  background-color: black;
-  color: teal;
-  font-size: 0.8em;
-  font-weight: bold;
-  margin-left: 1em;
-  margin-right: 1em;
-  outline: none;
-  transition: 0.3s;
+.log-out {
+  text-decoration: none;
 }
-
-button:hover {
-  background-color: teal;
-  color: white;
-  cursor: pointer;
-} */
 
 
 .play {
@@ -114,6 +98,14 @@ button:hover {
   transform: scale(1.05);
 }
 
+.song-art {
+  width: 2em;
+  height: 2em;
+  float: left;
+  margin-left: 4em;
+  padding-top: 0.6em;
+}
+
 .songTitle {
   font-weight: bold;
 }
@@ -160,7 +152,7 @@ button:hover {
   border-radius: 0.2em;
   margin-top: 1em;
   background-color: black;
-  color: teal;
+  color: #8d8d8d;
   font-size: 1em;
   font-weight: bold;
   outline: none;
@@ -216,7 +208,7 @@ button:hover {
 #songInfo {
   float: left;
   width: 30%;
-  margin-left: 5em;
+  margin-left: 1em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   text-align: left;

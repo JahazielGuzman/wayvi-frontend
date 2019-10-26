@@ -9,8 +9,8 @@ class App extends Component {
   state = {
     allSongs: [],
     user: null,
-    pausedSong: {},
-    currentSong: {},
+    pausedSong: null,
+    currentSong: null,
     currentSongIndex: -1,
     playlists: [],
     isPlaying: 0,
@@ -21,6 +21,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    if (localStorage.getItem('auth_token')) {
+      fetch(`${URL}/establish_session`, {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": localStorage.getItem('auth_token')
+        }
+      })
+      .then(res => res.json())
+      .then(result => {
+          this.setState({user: result.user});
+       });
+    }
+
     fetch(`${URL}/songs`)
     .then(res => res.json())
     .then(songData => {
@@ -63,11 +77,16 @@ class App extends Component {
       if (result.token == "")
         alert("you're username or password are incorrect");
       else {
-        const token = result.token.split(' ')[1];
+        const token = result.token;
         localStorage.setItem('auth_token', token);
         this.setState({user: result.user})
       }
     })
+  }
+
+  logout = () => {
+    localStorage.removeItem('auth_token');
+    this.setState({user: null});
   }
 
   register = (username, name, password) => {
@@ -81,7 +100,7 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(result => {
-      const token = result.token.split(' ')[1];
+      const token = result.token;
       localStorage.setItem('auth_token', token);
       this.setState({user: result.user})
     });
@@ -171,6 +190,7 @@ class App extends Component {
             <Sidebar
               user={this.state.user}
               login={this.login}
+              logout={this.logout}
               register={this.register}
               playlists={userPlaylists}
               showPlaylist={this.showPlaylist}
