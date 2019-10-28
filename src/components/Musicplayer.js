@@ -3,13 +3,15 @@ import React from 'react'
 class Musicplayer extends React.Component {
 
   componentDidUpdate() {
-
+    // If we updared the isPlaying state variable to true
+    // that is, we want to start playing audio...
     if (this.props.isPlaying) {
-      
-      if (this.props.pausedSong != this.props.currentSong) {
-        this.refs.player.load();
-      }
-
+    
+    // If we want to start playing audio and we previously paused a song
+    //      
+    if (this.props.pausedSong != this.props.currentSong) {
+      this.refs.player.load();
+    }
       this.refs.player.play();
     }
     else {
@@ -17,11 +19,17 @@ class Musicplayer extends React.Component {
     }
   }
 
+  // onClickPlay will fire when the audio element is set to play a song.
+  // If the button is pressed when audio is paused, playOrPauseCurrentSong()
+  // will set the isPlaying state variable to true
   onClickPlay() {
     if (!this.props.isPlaying)
       this.props.playOrPauseCurrentSong();
   }
 
+  // onClickPause will fire when the audio element is set to pause a song.
+  // If the button is pressed when audio is playing, playOrPauseCurrentSong()
+  // will set the isPlaying state variable to false
   onClickPause() {
     if (this.props.isPlaying)
       this.props.playOrPauseCurrentSong();

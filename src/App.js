@@ -3,7 +3,8 @@ import './App.css';
 import Musicplayer from './components/Musicplayer'
 import SongCollection from './components/SongCollection'
 import Sidebar from './components/Sidebar';
-const URL = 'http://localhost:3000';
+const URL = process.env.REACT_APP_BACKEND
+
 class App extends Component {
 
   state = {
@@ -54,15 +55,6 @@ class App extends Component {
       })
   }
 
-  playNewSong = (song, songIndex) => {
-    this.setState({ currentSong: song , currentSongIndex: songIndex, isPlaying: 1 })
-  }
-
-  playOrPauseCurrentSong = () => {
-
-      this.setState({ pausedSong: this.state.currentSong, isPlaying: !this.state.isPlaying })
-  }
-
   login = (username, password) => {
     fetch(`${URL}/login`, {
       method: "POST",
@@ -86,7 +78,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem('auth_token');
-    this.setState({user: null});
+    this.setState({user: null, showPlaylist: 0});
   }
 
   register = (username, name, password) => {
@@ -106,16 +98,34 @@ class App extends Component {
     });
   }
 
+
+  // fire this callback when we click play button on the song component. It will receive 
+  // a song object and the index of that song in the current playlist. We will set the pausedSong
+  // to null because we don't need the previously paused song anymore. PausedSong is used to 
+  // reload the music player when we change a song. Since we are pressing the play button, we will
+  // set the isPlaying value to true to initiate the play procedure on the MusicPlayer component.
+  playNewSong = (song, songIndex) => {
+    this.setState({pausedSong: null, currentSong: song , currentSongIndex: songIndex, isPlaying: 1})
+  }
+
+  // This callback fires when we press play or pause on the musicplayer or press pause on the
+  // song component. This method sets the pauseSong so that we can resume from either play button
+  // on song component or the musicplayer. We flip the isPlaying variable to the opposite boolean value
+  playOrPauseCurrentSong = () => {
+
+      this.setState({ pausedSong: !this.state.isPlaying ? this.state.pausedSong : this.state.currentSong, isPlaying: !this.state.isPlaying })
+  }
+
   playPrev = () => {
     const songIndex = this.state.currentSongIndex;
     if (songIndex > 0)
-      this.setState({currentSong: this.state.songList[songIndex - 1], currentSongIndex: songIndex - 1})
+      this.setState({currentSong: this.state.songList[songIndex - 1], currentSongIndex: songIndex - 1, pausedSong: null})
   }
 
   playNext = () => {
     const songIndex = this.state.currentSongIndex;
     if (songIndex !== this.state.songList.length - 1)
-      this.setState({currentSong: this.state.songList[songIndex + 1], currentSongIndex: songIndex + 1})
+      this.setState({currentSong: this.state.songList[songIndex + 1], currentSongIndex: songIndex + 1, pausedSong: null})
   }
 
   showPlaylist = (playlist) => {
@@ -132,6 +142,7 @@ class App extends Component {
   }
 
   addPlaylist = (newPlaylistName) => {
+
     const newPlaylist = {
       name: newPlaylistName,
       user_id: this.state.user.id
