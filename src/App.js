@@ -42,13 +42,13 @@ class App extends Component {
       this.setState({ allSongs: songData, recommendedSongs: songData , songList: songData})
     })
 
-    fetch("http://localhost:3000/users")
+    fetch(`${URL}/users`)
       .then(res => res.json())
       .then(usersData => {
         this.setState({ allUsers: usersData })
       })
 
-    fetch("http://localhost:3000/playlists")
+    fetch(`${URL}/playlists`)
       .then(res => res.json())
       .then(playlistData => {
         this.setState({ playlists: playlistData })
@@ -129,7 +129,7 @@ class App extends Component {
   }
 
   showPlaylist = (playlist) => {
-    fetch(`http://localhost:3000/playlists/${playlist.id}`)
+    fetch(`${URL}/playlists/${playlist.id}`)
       .then(res => res.json())
       .then(songListData => {
         const recommendedSongs = this.state.allSongs.filter((song) => {
@@ -148,7 +148,7 @@ class App extends Component {
       user_id: this.state.user.id
     }
 
-    fetch("http://localhost:3000/playlists", {
+    fetch(`${URL}/playlists`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +167,7 @@ class App extends Component {
       song_id: song.id
     }
 
-    fetch("http://localhost:3000/song_lists", {
+    fetch(`${URL}/song_lists`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
